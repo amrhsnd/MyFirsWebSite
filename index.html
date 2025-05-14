@@ -2,123 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Astrology Chart Viewer</title>
+  <title>Are You Sure?</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fdfdfd;
       margin: 0;
-      padding: 2rem;
+      height: 100vh;
+      background: #111;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-    }
-
-    h1 {
-      color: #222;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .input-container {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    input[type="text"] {
-      padding: 0.6rem;
-      width: 300px;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      flex-direction: column;
+      font-family: sans-serif;
     }
 
     button {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      margin-left: 0.5rem;
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
       border: none;
-      border-radius: 6px;
-      background-color: #4CAF50;
+      border-radius: 8px;
+      background-color: #ff4444;
       color: white;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    #widget-container {
-      width: 100%;
-      max-width: 700px;
-      margin-top: 2rem;
+    button:hover {
+      background-color: #cc0000;
     }
 
-    h2 {
-      margin-top: 2rem;
-      color: #555;
-    }
-
-    a {
-      color: #4CAF50;
+    #gif {
+      display: none;
+      max-width: 80vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Astrology Chart Viewer</h1>
-
-  <div class="input-container">
-    <label for="place">Enter your place of birth:</label><br/>
-    <input type="text" id="place" placeholder="e.g., London, England">
-    <button onclick="loadChart()">Show Chart</button>
-  </div>
-
-  <div id="widget-container">
-    <!-- Widget will be inserted here -->
-  </div>
-
-  <h2>Explore your full chart with the
-    <a target="_blank" href="https://astro-charts.com/tools/new/birth-chart/">Astro-Charts Calculator</a>
-  </h2>
+  <button id="confirmBtn">Are you sure you want to open this?</button>
+  <img id="gif" src="https://iili.io/3Um9Gf9.gif" alt="Reaction GIF" />
 
   <script>
-    function loadChart() {
-      const place = document.getElementById('place').value;
-      const container = document.getElementById('widget-container');
-      container.innerHTML = '';
+    const button = document.getElementById('confirmBtn');
+    const gif = document.getElementById('gif');
 
-      if (!place.trim()) {
-        alert("Please enter a valid place.");
-        return;
-      }
-
-      const div = document.createElement('div');
-      div.setAttribute('id', 'widget_coa_container');
-      div.setAttribute('geo_pk', '17'); // Note: static geo_pk, not dynamic without API
-      div.setAttribute('place', place);
-
-      container.appendChild(div);
-
-      const script = document.createElement('script');
-      script.src = 'https://astro-charts.com/client/common/widget/js/widget-coa.min.js';
-      container.appendChild(script);
-    }
+    button.addEventListener('click', () => {
+      button.style.display = 'none';
+      gif.style.display = 'block';
+    });
   </script>
-  <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container" style="height:100%;width:100%">
-  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-  {
-  "autosize": true,
-  "symbol": "NASDAQ:AAPL",
-  "interval": "D",
-  "timezone": "Etc/UTC",
-  "theme": "light",
-  "style": "1",
-  "locale": "en",
-  "allow_symbol_change": true,
-  "support_host": "https://www.tradingview.com"
-}
-  </script>
-</div>
-<!-- TradingView Widget END -->
 </body>
 </html>
